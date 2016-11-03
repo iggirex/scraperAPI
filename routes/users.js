@@ -31,22 +31,20 @@ var request = require('request')
   // })
 //   return data;
 // };
+
 router.get('/', function(req, res, next) {
   // request("http://www.foodspotting.com/find/best/tofu/in/Denver-CO-USA", function(error, response, body) {
   request("http://www.pmichaud.com/toast/", function(error, response, body) {
     if(!error && response.statusCode === 200) {
-
       // var data = scrapeDataFromHtml(body);
 
       var $ = cheerio.load(body);
-      var header = $('h2')
-      // var text = header.data
-      // console.log($(this))
-      console.log("THIS IS TTTEEXXXTTT :", header)
 
-      $('p').each(function() {
+
+      $('h2').each(function() {
         var a = $(this)
-        console.log("YYYYOOO THIS IS A!!!: ", a)
+        var headers = a[0].next.data
+        console.log("YYYYOOO THIS IS POPtart BLOWtorch!!!: ", headers)
       })
       res.send("hi");
     }
@@ -55,5 +53,3 @@ router.get('/', function(req, res, next) {
 });
 
 module.exports = router;
-
-//commit this to github L8Tr
